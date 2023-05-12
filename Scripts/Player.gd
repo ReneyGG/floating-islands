@@ -1,23 +1,29 @@
 extends KinematicBody2D
 
 export var gravity = 60
-export var acceleration = 2200
+export var acceleration = 2000
 export var deacceleration = 5000
-export var max_speed = 700
+export var max_speed = 600
 export var friction = 2400
-export var jump_height = 1300
+export var jump_height = 1000
+export var jetpack_power = 400
+export var jetpack_maxfuel = 100
 
-onready var sprite = get_node("Sprite")
-onready var timer = get_node("Timer")
-
+var jetpack_fuel
 var jump_count
 var motion = Vector2()
 var hSpeed = 0
 var air = false
 
+onready var sprite = get_node("Sprite")
+onready var jump_timer = get_node("JumpTimer")
+onready var fuel_label = get_node("Camera/FuelLabel")
+
 func _ready():
-	timer.wait_time = 0.1
-	timer.one_shot = true
+	jetpack_fuel = jetpack_maxfuel
+	jump_timer.wait_time = 0.1
+	jump_timer.one_shot = true
+	fuel_label.text = "Fuel: "+str(jetpack_fuel)
 
 func movement(var delta):
 	if Input.is_action_pressed("ui_right"):
@@ -50,11 +56,18 @@ func _physics_process(delta):
 			sprite.scale = Vector2(1.2, 0.8)
 		air = false
 		jump_count = 1
-	if Input.is_action_just_pressed("ui_up"):
+		jetpack_fuel = jetpack_maxfuel 
+		fuel_label.text = "Fuel: "+str(jetpack_fuel)
+	if Input.is_action_just_pressed("ui_up") and jump_count != 0 and !air:
 		sprite.scale = Vector2(0.8, 1.2)
-		timer.start()
-
-	if timer.get_time_left() > 0.0 and jump_count != 0:
+		jump_timer.start()
+	if Input.is_action_pressed("jetpack") and jetpack_fuel > 0:
+		sprite.scale = Vector2(0.8, 1.2)
+		motion.y = -jetpack_power
+		jetpack_fuel -= 1
+		fuel_label.text = "Fuel: "+str(jetpack_fuel)
+	
+	if jump_timer.get_time_left() > 0.0:
 		motion.y = -jump_height
 		jump_count-=1
 	
