@@ -1,33 +1,65 @@
 extends KinematicBody2D
 
-export var movement_speed = 500
-export var velocity = Vector2.ZERO
-export var jump_impulse = 750
-export var gravity = 20
-export var terminal_velocity = 50
+export var gravity = 60
+export var acceleration = 2200
+export var deacceleration = 5000
+export var max_speed = 700
+export var friction = 2400
+export var jump_height = 1300
+
+onready var sprite = get_node("Sprite")
+onready var timer = get_node("Timer")
+
+var jump_count
+var motion = Vector2()
+var hSpeed = 0
+var air = false
 
 func _ready():
-	pass
+	timer.wait_time = 0.1
+	timer.one_shot = true
 
-func _physics_process(_delta):
-	
-	# Handles basic movement.
-
-	if Input.is_action_pressed("move_left"):
-		velocity.x = -movement_speed
-	elif Input.is_action_pressed("move_right"):
-		velocity.x = movement_speed
+func movement(var delta):
+	if Input.is_action_pressed("ui_right"):
+		if(hSpeed <-100):
+			hSpeed += (deacceleration * delta)
+		elif(hSpeed < max_speed):
+			hSpeed += (acceleration * delta)
+			sprite.flip_h = false
+		else:
+			pass
+	elif Input.is_action_pressed("ui_left"):
+		if(hSpeed > 100):
+			hSpeed -= (deacceleration * delta)
+		elif(hSpeed > -max_speed):
+			hSpeed -= (acceleration * delta)
+			sprite.flip_h = true
+		else:
+			pass
 	else:
-		velocity.x = 0
-	
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
-			_jump()
-	_fall()
-	
-	velocity = move_and_slide(velocity, Vector2.UP)
+		hSpeed -= min(abs(hSpeed), friction * delta) * sign(hSpeed)
 
-func _jump():
-	velocity.y -= jump_impulse
+func _physics_process(delta):
+	motion.y += gravity
+	
+	movement(delta)
+	if !is_on_floor():
+		air = true
+	if is_on_floor():
+		if air:
+			sprite.scale = Vector2(1.2, 0.8)
+		air = false
+		jump_count = 1
+	if Input.is_action_just_pressed("ui_up"):
+		sprite.scale = Vector2(0.8, 1.2)
+		timer.start()
 
-func _fall():
-	velocity.y += gravity
+	if timer.get_time_left() > 0.0 and jump_count != 0:
+		motion.y = -jump_height
+		jump_count-=1
+	
+	motion.x = hSpeed
+	motion = move_and_slide(motion,Vector2(0,-1))
+	
+	sprite.scale.x = lerp(sprite.scale.x, 1, 0.2)
+	sprite.scale.y = lerp(sprite.scale.y, 1, 0.2)
