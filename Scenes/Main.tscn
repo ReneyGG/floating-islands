@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/HubIsland.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/DriftingIsland.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/IslandSpawner.tscn" type="PackedScene" id=4]
 
 [node name="Main" type="Node2D"]
 
@@ -11,8 +11,7 @@
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 340, -140 )
 
-[node name="DriftingIsland" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1340, 220 )
-
-[node name="DriftingIsland" parent="DriftingIsland" instance=ExtResource( 3 )]
-position = Vector2( -2500, -360 )
+[node name="IslandSpawner" parent="." instance=ExtResource( 4 )]
+position = Vector2( 3000, 0 )
+maxheight = 3000
+minheight = -3000

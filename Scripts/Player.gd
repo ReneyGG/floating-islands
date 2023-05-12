@@ -56,7 +56,7 @@ func _physics_process(delta):
 			sprite.scale = Vector2(1.2, 0.8)
 		air = false
 		jump_count = 1
-		jetpack_fuel = jetpack_maxfuel 
+		jetpack_fuel = int(clamp(jetpack_fuel+1, 0, jetpack_maxfuel))
 		fuel_label.text = "Fuel: "+str(jetpack_fuel)
 	if Input.is_action_just_pressed("ui_up") and jump_count != 0 and !air:
 		sprite.scale = Vector2(0.8, 1.2)
