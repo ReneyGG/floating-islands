@@ -6,12 +6,24 @@
 
 [node name="Main" type="Node2D"]
 
-[node name="HubIsland" parent="." instance=ExtResource( 2 )]
+[node name="IslandSpawners" type="YSort" parent="."]
+
+[node name="IslandSpawnerHigh1" parent="IslandSpawners" instance=ExtResource( 4 )]
+position = Vector2( -3000, -900 )
+drift_direction = 1
+
+[node name="IslandSpawnerHigh2" parent="IslandSpawners" instance=ExtResource( 4 )]
+position = Vector2( 3000, -1800 )
+
+[node name="IslandSpawnerLow1" parent="IslandSpawners" instance=ExtResource( 4 )]
+position = Vector2( 3000, 900 )
+
+[node name="IslandSpawnerLow2" parent="IslandSpawners" instance=ExtResource( 4 )]
+position = Vector2( -3000, 1800 )
+drift_direction = 1
+
+[node name="HubIsland" parent="IslandSpawners" instance=ExtResource( 2 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 340, -140 )
-
-[node name="IslandSpawner" parent="." instance=ExtResource( 4 )]
-position = Vector2( 3000, 0 )
-maxheight = 3000
-minheight = -3000
+jetpack_power = 600
