@@ -21,7 +21,7 @@ onready var fuel_label = get_node("Camera/FuelLabel")
 
 func _ready():
 	jetpack_fuel = jetpack_maxfuel
-	jump_timer.wait_time = 0.1
+	jump_timer.wait_time = 0.15
 	jump_timer.one_shot = true
 	fuel_label.text = "Fuel: "+str(jetpack_fuel)
 
@@ -58,6 +58,7 @@ func _physics_process(delta):
 		jump_count = 1
 		jetpack_fuel = int(clamp(jetpack_fuel+1, 0, jetpack_maxfuel))
 		fuel_label.text = "Fuel: "+str(jetpack_fuel)
+	
 	if Input.is_action_just_pressed("ui_up") and jump_count != 0 and !air:
 		sprite.scale = Vector2(0.8, 1.2)
 		jump_timer.start()
@@ -66,6 +67,8 @@ func _physics_process(delta):
 		motion.y = -jetpack_power
 		jetpack_fuel -= 1
 		fuel_label.text = "Fuel: "+str(jetpack_fuel)
+	if Input.is_action_just_pressed("drop") and !air:
+		position.y += 1
 	
 	if jump_timer.get_time_left() > 0.0:
 		motion.y = -jump_height

@@ -14,7 +14,8 @@ onready var spawn_timer = get_node("IslandSpawnTimer")
 
 func _ready():
 	rng.randomize()
-	_randomize_timer()
+	spawn_timer.set_wait_time(1)
+	spawn_timer.start()
 
 func _on_IslandSpawnTimer_timeout():
 	# Generate a new island with some positional jitter and give it a random drift speed.
@@ -22,9 +23,11 @@ func _on_IslandSpawnTimer_timeout():
 	new_island.drift_speed = rng.randf_range(60.0, 100.0)*drift_direction
 	new_island.position.y += rng.randi_range(-position_jitter, position_jitter)
 	add_child(new_island)
-
+	print(new_island.position)
+	
 	_randomize_timer()
 
 func _randomize_timer():
 	# Set the timer to spawn a new island a random number of seconds later.
 	spawn_timer.set_wait_time(rng.randi_range(20, 60))
+	spawn_timer.start()
