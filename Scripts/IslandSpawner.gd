@@ -23,7 +23,6 @@ func _on_IslandSpawnTimer_timeout():
 	new_island.drift_speed = rng.randf_range(60.0, 100.0)*drift_direction
 	new_island.position.y += rng.randi_range(-position_jitter, position_jitter)
 	add_child(new_island)
-	print(new_island.position)
 	
 	_randomize_timer()
 

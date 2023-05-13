@@ -1,28 +1,33 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/HubIsland.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/IslandSpawner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Islands/HubIsland.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/ResourceDeposits/MineralDeposit.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Islands/IslandSpawner.tscn" type="PackedScene" id=4]
 
 [node name="Main" type="Node2D"]
 
-[node name="IslandSpawners" type="YSort" parent="."]
+[node name="Islands" type="YSort" parent="."]
 
-[node name="IslandSpawnerHigh1" parent="IslandSpawners" instance=ExtResource( 4 )]
+[node name="IslandSpawnerHigh1" parent="Islands" instance=ExtResource( 4 )]
 position = Vector2( -3000, -900 )
 drift_direction = 1
 
-[node name="IslandSpawnerHigh2" parent="IslandSpawners" instance=ExtResource( 4 )]
+[node name="IslandSpawnerHigh2" parent="Islands" instance=ExtResource( 4 )]
 position = Vector2( 3000, -1800 )
 
-[node name="IslandSpawnerLow1" parent="IslandSpawners" instance=ExtResource( 4 )]
+[node name="IslandSpawnerLow1" parent="Islands" instance=ExtResource( 4 )]
 position = Vector2( 3000, 900 )
 
-[node name="IslandSpawnerLow2" parent="IslandSpawners" instance=ExtResource( 4 )]
+[node name="IslandSpawnerLow2" parent="Islands" instance=ExtResource( 4 )]
 position = Vector2( -3000, 1800 )
 drift_direction = 1
 
-[node name="HubIsland" parent="IslandSpawners" instance=ExtResource( 2 )]
+[node name="HubIsland" parent="Islands" instance=ExtResource( 2 )]
+
+[node name="MineralDeposit" parent="Islands/HubIsland" instance=ExtResource( 3 )]
+show_behind_parent = true
+position = Vector2( -340, -80 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 340, -140 )
