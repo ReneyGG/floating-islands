@@ -58,6 +58,5 @@ margin_right = 1247.0
 margin_bottom = -718.0
 rect_scale = Vector2( 5, 5 )
 text = "Charge: 6"
-
 [connection signal="timeout" from="MiningLaser/RechargeWait" to="MiningLaser" method="_on_RechargeWait_timeout"]
 [connection signal="timeout" from="MiningLaser/RechargeTime" to="MiningLaser" method="_on_RechargeTime_timeout"]
