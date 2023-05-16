@@ -10,7 +10,7 @@ func drop_item():
 	#item_instance.type = "x"
 	#item_instance.sprite = "x"
 	item_instance.global_position = self.global_position
-	get_node("/root/Main").add_child(item_instance) #not a fan but if it works it works lmao
+	get_node("/root/Main").add_child(item_instance)
 
 func _on_MineralDeposit_area_entered(body):
 	if body.is_in_group("MiningLaserBolt") and body.power >= toughness:
