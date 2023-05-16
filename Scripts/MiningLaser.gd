@@ -16,7 +16,7 @@ onready var recharge_wait = get_node("RechargeWait")
 
 onready var charge_label = get_node("ChargeLabel")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	
 	if Input.is_action_pressed("shoot"):
 		if firing_interval.is_stopped() and laser_charge > 0:

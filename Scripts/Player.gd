@@ -84,4 +84,6 @@ func _physics_process(delta):
 func _on_LootRange_body_entered(body):
 	if body.is_in_group("resource") and equip_load.value < 15:
 		body.loot()
+
+func add_load():
 		equip_load.value += 1
