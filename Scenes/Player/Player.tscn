@@ -1,17 +1,20 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Placeholders/player.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/MiningLaser.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Projectiles/MiningLaserBolt.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Placeholders/bar_texture.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 30.0
 height = 51.8392
 
+[sub_resource type="CircleShape2D" id=2]
+radius = 187.477
+
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 0.418121, -9.19865 )
-collision_mask = 2
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -33,6 +36,25 @@ margin_right = 1250.01
 margin_bottom = -851.475
 rect_scale = Vector2( 5, 5 )
 text = "Fuel: 100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="Camera"]
+margin_left = 1341.0
+margin_top = -540.0
+margin_right = 1474.0
+margin_bottom = -128.0
+max_value = 15.0
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 5 )
+fill_mode = 3
+tint_under = Color( 0.529412, 0.529412, 0.529412, 1 )
+tint_progress = Color( 0.619608, 0.47451, 0.0431373, 1 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="JumpTimer" type="Timer" parent="."]
 
@@ -59,5 +81,11 @@ margin_bottom = -718.0
 rect_scale = Vector2( 5, 5 )
 text = "Charge: 6"
 
+[node name="LootRange" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LootRange"]
+shape = SubResource( 2 )
 [connection signal="timeout" from="MiningLaser/RechargeWait" to="MiningLaser" method="_on_RechargeWait_timeout"]
 [connection signal="timeout" from="MiningLaser/RechargeTime" to="MiningLaser" method="_on_RechargeTime_timeout"]
+[connection signal="body_entered" from="LootRange" to="." method="_on_LootRange_body_entered"]

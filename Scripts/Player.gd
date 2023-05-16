@@ -18,6 +18,7 @@ var air = false
 onready var sprite = get_node("Sprite")
 onready var jump_timer = get_node("JumpTimer")
 onready var fuel_label = get_node("Camera/FuelLabel")
+onready var equip_load = get_node("Camera/TextureProgress")
 
 func _ready():
 	jetpack_fuel = jetpack_maxfuel
@@ -79,3 +80,10 @@ func _physics_process(delta):
 	
 	sprite.scale.x = lerp(sprite.scale.x, 1, 0.2)
 	sprite.scale.y = lerp(sprite.scale.y, 1, 0.2)
+
+func _on_LootRange_body_entered(body):
+	if body.is_in_group("resource") and equip_load.value < 15:
+		body.loot()
+
+func add_load():
+		equip_load.value += 1
