@@ -26,5 +26,5 @@ drift_direction = 1
 collision_mask = 29
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 340, -140 )
+position = Vector2( 340, -246 )
 jetpack_power = 600

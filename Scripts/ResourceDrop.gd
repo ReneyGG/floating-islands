@@ -14,7 +14,6 @@ func _ready():
 	random.randomize()
 	var liny = random.randi_range(320,400)
 	var linx = random.randi_range(-120,120)
-	print(linx)
 	linear_velocity = Vector2(linx,-liny)
 	angular_velocity = 30
 

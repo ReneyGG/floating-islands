@@ -46,11 +46,12 @@ margin_top = -540.0
 margin_right = 1474.0
 margin_bottom = -128.0
 max_value = 15.0
+value = 15.0
 texture_under = ExtResource( 5 )
 texture_progress = ExtResource( 5 )
 fill_mode = 3
 tint_under = Color( 0.529412, 0.529412, 0.529412, 1 )
-tint_progress = Color( 0.619608, 0.47451, 0.0431373, 1 )
+tint_progress = Color( 0.780392, 0.6, 0.0627451, 1 )
 nine_patch_stretch = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -88,4 +89,6 @@ collision_mask = 4
 shape = SubResource( 2 )
 [connection signal="timeout" from="MiningLaser/RechargeWait" to="MiningLaser" method="_on_RechargeWait_timeout"]
 [connection signal="timeout" from="MiningLaser/RechargeTime" to="MiningLaser" method="_on_RechargeTime_timeout"]
+[connection signal="area_entered" from="LootRange" to="." method="_on_LootRange_area_entered"]
+[connection signal="area_exited" from="LootRange" to="." method="_on_LootRange_area_exited"]
 [connection signal="body_entered" from="LootRange" to="." method="_on_LootRange_body_entered"]

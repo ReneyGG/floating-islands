@@ -14,6 +14,7 @@ var jump_count
 var motion = Vector2()
 var hSpeed = 0
 var air = false
+var deposit = false
 
 onready var sprite = get_node("Sprite")
 onready var jump_timer = get_node("JumpTimer")
@@ -71,6 +72,10 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("drop") and !air:
 		position.y += 1
 	
+	if Input.is_action_pressed("interact"):
+		if deposit and equip_load.value > 0:
+			equip_load.value -= 1
+	
 	if jump_timer.get_time_left() > 0.0:
 		motion.y = -jump_height
 		jump_count-=1
@@ -87,3 +92,10 @@ func _on_LootRange_body_entered(body):
 
 func add_load():
 		equip_load.value += 1
+
+func _on_LootRange_area_entered(area):
+	if area.name == "Deposit":
+		deposit = true
+
+func _on_LootRange_area_exited(area):
+	deposit = false
