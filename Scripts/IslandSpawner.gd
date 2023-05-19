@@ -8,11 +8,16 @@ export var drift_direction = -1
 
 # A small amount of randomness added to the Y position of the island to make them seem more organic.
 export var position_jitter = 500
+export var higher_relative_position: bool = false
 
 var rng = RandomNumberGenerator.new()
 onready var spawn_timer = get_node("IslandSpawnTimer")
 
 func _ready():
+	if higher_relative_position:
+		self.z_index = 0
+	else:
+		self.z_index = 3
 	rng.randomize()
 	spawn_timer.set_wait_time(1)
 	spawn_timer.start()
@@ -22,6 +27,7 @@ func _on_IslandSpawnTimer_timeout():
 	var new_island = possible_islands[rng.randi() % len(possible_islands)].instance()
 	new_island.drift_speed = rng.randf_range(60.0, 100.0)*drift_direction
 	new_island.position.y += rng.randi_range(-position_jitter, position_jitter)
+	new_island.z_index = self.z_index
 	add_child(new_island)
 	
 	_randomize_timer()
