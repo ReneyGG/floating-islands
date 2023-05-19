@@ -11,9 +11,11 @@
 [node name="IslandSpawnerHigh1" parent="Islands" instance=ExtResource( 4 )]
 position = Vector2( -3000, -900 )
 drift_direction = 1
+higher_relative_position = true
 
 [node name="IslandSpawnerHigh2" parent="Islands" instance=ExtResource( 4 )]
 position = Vector2( 3000, -1800 )
+higher_relative_position = true
 
 [node name="IslandSpawnerLow1" parent="Islands" instance=ExtResource( 4 )]
 position = Vector2( 3000, 900 )

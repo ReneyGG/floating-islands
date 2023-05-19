@@ -80,6 +80,11 @@ func _physics_process(delta):
 		motion.y = -jump_height
 		jump_count-=1
 	
+	if is_on_floor():
+		var collider = get_slide_collision(0).collider
+		if collider.is_in_group("island"):
+			self.z_index = collider.z_index + 1
+	
 	motion.x = hSpeed
 	motion = move_and_slide(motion,Vector2(0,-1))
 	

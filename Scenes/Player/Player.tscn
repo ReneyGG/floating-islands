@@ -83,7 +83,7 @@ rect_scale = Vector2( 5, 5 )
 text = "Charge: 6"
 
 [node name="LootRange" type="Area2D" parent="."]
-collision_mask = 4
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LootRange"]
 shape = SubResource( 2 )
