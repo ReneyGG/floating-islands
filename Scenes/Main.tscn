@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+
+[gd_scene load_steps=6 format=2]
+
 
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Islands/HubIsland.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Islands/IslandSpawner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/UpgradeMenu.tscn" type="PackedScene" id=5]
 
 [node name="Main" type="Node2D"]
 
@@ -31,9 +34,15 @@ collision_mask = 29
 position = Vector2( 340, -246 )
 jetpack_power = 600
 
+[node name="UpgradeMenu" parent="Player" instance=ExtResource( 5 )]
+margin_left = 4.0
+margin_top = 14.0
+margin_right = 4.0
+margin_bottom = 14.0
+rect_scale = Vector2( 2, 2 )
+
 [node name="Bounds" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bounds"]
-polygon = PoolVector2Array( -3640, 2432, 3640, 2440, 3592, -2608, 3840, -2608, 3840, 2712, -3840, 2712, -3848, -2608, -3640, -2608 )
-
+polygon = PoolVector2Array( -4968, 2880, 5024, 2912, 5032, -3288, 5376, -3288, 5256, 3296, -5184, 3320, -5208, -3288, -4912, -3288 )
 [connection signal="body_entered" from="Bounds" to="." method="_on_Bounds_body_entered"]
