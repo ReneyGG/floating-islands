@@ -16,16 +16,24 @@ var hSpeed = 0
 var air = false
 var deposit = false
 
+var pocket = {"floatstone":15,"aetheric_iron":0,"celestium":0,"azulite":0,"sky_ruby":0}
+var hub = {"floatstone":0,"aetheric_iron":0,"celestium":0,"azulite":0,"sky_ruby":0}
+
 onready var sprite = get_node("Sprite")
 onready var jump_timer = get_node("JumpTimer")
 onready var fuel_label = get_node("Camera/FuelLabel")
 onready var equip_load = get_node("Camera/TextureProgress")
+onready var upgrade = get_node("UpgradeMenu")
 
 func _ready():
 	jetpack_fuel = jetpack_maxfuel
 	jump_timer.wait_time = 0.15
 	jump_timer.one_shot = true
 	fuel_label.text = "Fuel: "+str(jetpack_fuel)
+
+func _unhandled_input(event):
+	if event.is_action_pressed("upgrade"):
+		upgrade.visible = !upgrade.visible
 
 func movement(var delta):
 	if Input.is_action_pressed("ui_right"):
@@ -48,6 +56,9 @@ func movement(var delta):
 		hSpeed -= min(abs(hSpeed), friction * delta) * sign(hSpeed)
 
 func _physics_process(delta):
+	if upgrade.visible:
+		return
+	
 	motion.y += gravity
 	
 	movement(delta)
@@ -75,6 +86,11 @@ func _physics_process(delta):
 	if Input.is_action_pressed("interact"):
 		if deposit and equip_load.value > 0:
 			equip_load.value -= 1
+			for m in pocket:
+				if pocket[m] > 0:
+					pocket[m] -= 1
+					hub[m] += 1
+					break
 	
 	if jump_timer.get_time_left() > 0.0:
 		motion.y = -jump_height
@@ -91,12 +107,17 @@ func _physics_process(delta):
 	sprite.scale.x = lerp(sprite.scale.x, 1, 0.2)
 	sprite.scale.y = lerp(sprite.scale.y, 1, 0.2)
 
+func die():
+	motion.y = 0
+	self.global_position = Vector2(0,-200)
+
 func _on_LootRange_body_entered(body):
 	if body.is_in_group("resource") and equip_load.value < 15:
 		body.loot()
 
-func add_load():
+func add_load(ore):
 		equip_load.value += 1
+		pocket[ore] += 1
 
 func _on_LootRange_area_entered(area):
 	if area.name == "Deposit":

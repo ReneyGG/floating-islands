@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var type = "iron"
+var type = "floatstone"
 var sprite = "res://Assets/Placeholders/mineral-deposit-hanging.png"
 var go = false
 var pos
@@ -29,5 +29,5 @@ func loot():
 	go = true
 
 func _on_Timer_timeout():
-	player.add_load()
+	player.add_load(type)
 	queue_free()
