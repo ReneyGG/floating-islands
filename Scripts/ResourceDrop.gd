@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 var type = "iron"
-var sprite = "res://Assets/Placeholders/mineral-deposit-hanging.png"
+#var sprite = "res://Assets/Placeholders/mineral-deposit-hanging.png"
 var go = false
 var pos
 var end = false
@@ -9,7 +9,7 @@ var end = false
 onready var player = get_parent().get_node("Player")
 
 func _ready():
-	get_node("Sprite").texture = load(sprite)
+	#get_node("Sprite").texture = load(sprite)
 	var random = RandomNumberGenerator.new()
 	random.randomize()
 	var liny = random.randi_range(320,400)

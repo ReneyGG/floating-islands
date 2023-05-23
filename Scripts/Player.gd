@@ -99,7 +99,7 @@ func add_load():
 		equip_load.value += 1
 
 func _on_LootRange_area_entered(area):
-	if area.name == "Deposit":
+	if area.name == "DepositPoint":
 		deposit = true
 
 func _on_LootRange_area_exited(area):

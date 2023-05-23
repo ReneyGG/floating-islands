@@ -1,12 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Islands/HubIsland.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scripts/Main.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Islands/IslandSpawner.tscn" type="PackedScene" id=4]
 
 [node name="Main" type="Node2D"]
-script = ExtResource( 3 )
 
 [node name="Islands" type="YSort" parent="."]
 
@@ -37,4 +35,5 @@ jetpack_power = 600
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bounds"]
 polygon = PoolVector2Array( -3640, 2432, 3640, 2440, 3592, -2608, 3840, -2608, 3840, 2712, -3840, 2712, -3848, -2608, -3640, -2608 )
+
 [connection signal="body_entered" from="Bounds" to="." method="_on_Bounds_body_entered"]
