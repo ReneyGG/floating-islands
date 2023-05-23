@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var velocity = Vector2.ZERO
 export var drift_speed = 0
+export var island_value = 0
 
 func _ready():
 	#velocity.x += drift_speed
