@@ -5,7 +5,7 @@
 [ext_resource path="res://Scripts/MiningLaser.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Projectiles/MiningLaserBolt.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Placeholders/bar_texture.png" type="Texture" id=5]
-[ext_resource path="res://Assets/SFX/Scifi Blast Quick.mp3" type="AudioStream" id=6]
+[ext_resource path="res://Assets/SFX/scifi_blast.wav" type="AudioStream" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 30.0
@@ -84,15 +84,15 @@ margin_bottom = -718.0
 rect_scale = Vector2( 5, 5 )
 text = "Charge: 6"
 
-[node name="LaserDischarge" type="AudioStreamPlayer2D" parent="MiningLaser"]
+[node name="LaserDischarge" type="AudioStreamPlayer" parent="MiningLaser"]
 stream = ExtResource( 6 )
+volume_db = -12.0
 
 [node name="LootRange" type="Area2D" parent="."]
 collision_mask = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LootRange"]
 shape = SubResource( 2 )
-
 [connection signal="timeout" from="MiningLaser/RechargeWait" to="MiningLaser" method="_on_RechargeWait_timeout"]
 [connection signal="timeout" from="MiningLaser/RechargeTime" to="MiningLaser" method="_on_RechargeTime_timeout"]
 [connection signal="area_entered" from="LootRange" to="." method="_on_LootRange_area_entered"]
