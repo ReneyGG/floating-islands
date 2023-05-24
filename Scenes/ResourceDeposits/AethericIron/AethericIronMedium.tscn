@@ -2,9 +2,10 @@
 
 [ext_resource path="res://Assets/Resources/ResourceDeposits/aetheric-iron-medium.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/MineralDeposit.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/ResourceDeposits/ResourceDrop.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/ResourceDeposits/AethericIron/AethericIronDrop.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/SFX/rock_shatter.wav" type="AudioStream" id=4]
 [ext_resource path="res://Assets/SFX/rock_breaking.wav" type="AudioStream" id=5]
+
 
 [node name="AethericIronMedium" type="Area2D"]
 collision_layer = 4
