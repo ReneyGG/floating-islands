@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Placeholders/player.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/MiningLaser.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Projectiles/MiningLaserBolt.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Placeholders/bar_texture.png" type="Texture" id=5]
+[ext_resource path="res://Assets/SFX/Scifi Blast Quick.mp3" type="AudioStream" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 30.0
@@ -72,6 +73,7 @@ one_shot = true
 one_shot = true
 
 [node name="RechargeTime" type="Timer" parent="MiningLaser"]
+wait_time = 0.5
 one_shot = true
 
 [node name="ChargeLabel" type="Label" parent="MiningLaser"]
@@ -81,6 +83,9 @@ margin_right = 1247.0
 margin_bottom = -718.0
 rect_scale = Vector2( 5, 5 )
 text = "Charge: 6"
+
+[node name="LaserDischarge" type="AudioStreamPlayer2D" parent="MiningLaser"]
+stream = ExtResource( 6 )
 
 [node name="LootRange" type="Area2D" parent="."]
 collision_mask = 14
