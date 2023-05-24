@@ -14,6 +14,8 @@ onready var recharge_time = get_node("RechargeTime")
 # The wait between firing the last bolt and your lasers starting to recharge.
 onready var recharge_wait = get_node("RechargeWait")
 
+onready var discharge_shound = get_node("LaserDischarge")
+
 onready var charge_label = get_node("ChargeLabel")
 
 func _physics_process(_delta):
@@ -40,6 +42,7 @@ func _fire_laser():
 	new_laser.trajectory = get_local_mouse_position().normalized()
 	new_laser.look_at(get_local_mouse_position())
 	new_laser.global_position = global_position
+	discharge_shound.play()
 
 func _alter_laser_charge(amount):
 	# Alters laser charge by an amount. Ensures the charge doesn't go below 0 or above max.

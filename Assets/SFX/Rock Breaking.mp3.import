@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Rock Breaking.mp3-8e41bf549578aae0b8501a3370424b14.mp3str"
+
+[deps]
+
+source_file="res://Assets/SFX/Rock Breaking.mp3"
+dest_files=[ "res://.import/Rock Breaking.mp3-8e41bf549578aae0b8501a3370424b14.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
