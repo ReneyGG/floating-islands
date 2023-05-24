@@ -9,7 +9,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 485, 20 )
 
-[node name="DriftingIslandMedium" type="KinematicBody2D" groups=["island"]]
+[node name="DriftingIslandMedium" type="KinematicBody2D" groups=[
+"island",
+]]
 z_as_relative = false
 collision_layer = 2
 collision_mask = 29

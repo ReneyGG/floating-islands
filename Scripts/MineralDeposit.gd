@@ -13,8 +13,6 @@ func _ready():
 
 func drop_item():
 	var item_instance = resource_drop.instance()
-	#item_instance.type = "x"
-	#item_instance.sprite = "x"
 	item_instance.global_position = self.global_position
 	get_node("/root/Main").add_child(item_instance)
 
