@@ -6,8 +6,9 @@
 [ext_resource path="res://Assets/SFX/rock_shatter.wav" type="AudioStream" id=4]
 [ext_resource path="res://Assets/SFX/rock_breaking.wav" type="AudioStream" id=5]
 
-
-[node name="AethericIronSmall" type="Area2D"]
+[node name="AethericIronSmall" type="Area2D" groups=[
+"ore",
+]]
 collision_layer = 4
 collision_mask = 16
 script = ExtResource( 2 )
